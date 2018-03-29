@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form action="/register" method="post">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name">
+        <label for="email">Email:</label>
+        <input type="email" name="email">
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <label for="password_confirm">Confirm Password:</label>
+        <input type="password" name="password_confirm">
+        <input type="submit" value="Register">
+    </form>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        <label for="email_login">Email:</label>
+        <input type="email" name="email_login">
+        <label for="password_login">Password:</label>
+        <input type="password" name="password_login">
+        <input type="submit" value="login">
+    </form>
+    <form action="/logout" method="post">
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Current User: {{ request.session.logged_user }}</p>
+    <a href="/courses/logout">Logout</a>
+    <h1>Courses index</h1>
+
+    <h2>Add a new course</h2>
+    <form action="/courses/create" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name">
+        <label for="description">Description:</label>
+        <textarea name="description" cols="30" rows="5"></textarea>
+        <input type="submit" value="Add">
+    </form>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h2>Courses</h2>
+    <table>
+        <thead>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Created By</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for course in All_Courses %}
+            <tr>
+                <td><a href="{{ course.id }}/show">{{ course.name }}</a></td>
+                <td>{{ course.description }}</td>
+                <td>{{ course.created_at }}</td>
+                <td>{{ course.course_creator }}</td>
+                <td><a href="/courses/{{ course.id }}/destroy">Remove</a> <a href="/courses/{{ course.id }}/edit">Edit</a> <a href="/courses/{{ course.id }}/join">Join</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>

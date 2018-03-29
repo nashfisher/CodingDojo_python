@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Course Profile</title>
+</head>
+<body>
+    <p>Current User: {{ request.session.logged_user }}</p>
+    <a href="/courses/logout">Logout</a>
+    <h1>Course profile page</h1>
+    <h2>{{ Course.name }}</h2>
+    <p>Description: {{ Course.description }}</p>
+    <p>Created by {{ Course.course_creator }}</p>
+    <h3>Coursetakers</h3>
+    {% for coursetaker in Course.coursetakers.all %}
+        <p>{{ coursetaker.username }}</p>
+    {% endfor %}
+    <a href="/courses/{{ Course.id }}/join">Join</a>
+</body>
+</html>

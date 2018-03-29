@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey Result</title>
+</head>
+<body>
+    {% csrf_token %}
+    <p>Thanks for the survey submission. This has been submitted {{ request.session.submissions }} time(s).</p>
+    <h3>Submitted Form:</h3>
+    <p>Name:</p><p>{{ name }}</p>
+    <p>Dojo Location:</p><p>{{ location }}</p>
+    <p>Favorite Language:</p><p>{{ language }}</p>
+    <p>Comment:</p><p>{{ comment }}</p>
+
+    <a href="/">Retake Survey</a>
+</body>
+</html>
